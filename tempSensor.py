@@ -9,16 +9,16 @@ import Adafruit_DHT
 GPIO.setmode(GPIO.BCM)#using breakout board pins
 GPIO.setwarnings(False)
 
-pin = 26;#temp sensor 
-GPIO.setup(pin, GPIO.OUT)#the button pin is an output
-tempS = Adafruit_DHT.DHT22;
+pin = 26;#GPIO pin that the temperature sensor is set to
+GPIO.setup(pin, GPIO.IN)#the temperature sensor is an input
+sensor = Adafruit_DHT.DHT22;#sensor has properties of DHT22, as taken from adafruit library
 
 #The main program
 def loop():
     while True:#Makes sure that the program is always running
-        humidity,temperature = Adafruit_DHT.read_retry(tempS,pin)
+        humidity,temperature = Adafruit_DHT.read_retry(sensor,pin)
         print("Humidity is: " + str(humidity) + "     Temperature is: " + str(temperature));
-        time.sleep(1)
+        time.sleep(1)#needs 1 second delay between readings
 
     
 if __name__ == '__main__':     #  Program start from here
